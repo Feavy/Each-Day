@@ -1,0 +1,19 @@
+.google-btn {
+    cursor: pointer;
+}
+
+.google-hover-bg, .google-bg {
+    transition: all .2s;
+}
+
+.google-btn:hover .google-bg {
+    fill: #5f9bfa;
+}
+
+.google-btn:active .google-bg {
+    fill: #3367D6;
+}
+
+.google-bg {
+    fill: #4285F4;
+}

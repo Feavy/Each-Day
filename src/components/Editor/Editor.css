@@ -1,0 +1,89 @@
+#editor {
+    background-color: white;
+    max-width: 903px;
+    height: 88vh;
+    margin: auto;
+    border-radius: 33px 33px 0px 0px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    animation: bounce-up .33s;
+    position: relative;
+    bottom: 1.5vh;
+}
+
+@keyframes bounce-up {
+    0% {
+        transform: scale(.5);
+        top: 88vh;
+    }
+    
+    100% {
+        transform: scale(1);
+        top: 0vh;
+    }
+}
+
+#page-title {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    color: #666;
+    font-weight: normal;
+    line-height: 90px;
+    /* border-bottom: 2px solid #eee; */
+    outline: none;
+    position: relative;
+}
+
+#page-title::after {
+    content: "";
+    position: absolute;
+    left: 33%;
+    width: 33%;
+    height: 2px;
+    bottom: 0px;
+    background: #eee;
+}
+
+#content {
+    color: #666;
+    padding: 0 2em;
+}
+
+.pell-actionbar {
+    text-align: center;
+}
+
+.pell-content {
+    min-height: 10vh;
+    outline: none;
+    overflow-y: auto;
+    max-height: 75vh;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 2px;
+    background: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+
+.pell-button {
+    background: white;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+    margin-right: 10px;
+    font-weight: normal;
+    font-family: 'Comfortaa', Arial, Helvetica, sans-serif;
+}
