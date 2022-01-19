@@ -54,10 +54,10 @@
 }
 
 .pell-content {
-    min-height: 10vh;
+    height: 75vh;
+    max-height: 75vh;
     outline: none;
     overflow-y: auto;
-    max-height: 75vh;
 }
 
 /* width */
