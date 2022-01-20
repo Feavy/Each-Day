@@ -3,4 +3,5 @@ export default interface File {
     kind: string;
     mimeType: string;
     name: string;
+    content?: string;
 }

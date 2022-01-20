@@ -7,7 +7,7 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     animation: bounce-up .33s;
     position: relative;
-    bottom: 1.5vh;
+    bottom: 3vh;
 }
 
 @keyframes bounce-up {
@@ -46,7 +46,7 @@
 
 #content {
     color: #666;
-    padding: 0 2em;
+    padding: 0 6%;
 }
 
 .pell-actionbar {
@@ -86,4 +86,29 @@
     margin-right: 10px;
     font-weight: normal;
     font-family: 'Comfortaa', Arial, Helvetica, sans-serif;
+}
+
+.pell-button:hover {
+    color: #000;
+}
+
+blockquote {
+    position: relative;
+    margin-left: 0;
+    padding-left: 30px;
+    background: #f6f6f6;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 3px;
+}
+
+blockquote::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    width: 3px;
+    top: 0px;
+    bottom: 0px;
+    background: #999;
+    border-radius: 3px;
 }
