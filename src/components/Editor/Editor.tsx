@@ -4,7 +4,7 @@ import pell from 'pell'
 import "./Editor.css";
 import File from "../../model/File";
 import Callback from "../../utils/Callback";
-import { gDocToPell } from "./GDocToPellMapping";
+import { PellToGDoc, GDocToPell } from "./GDocToPellMapping";
 
 function getOffset(el: HTMLElement) {
     const rect = el.getBoundingClientRect();
@@ -40,7 +40,7 @@ const Editor: Component<Props> = (props: Props) => {
     createEffect(() => {
         console.log("EDITOR file", props.file);
         if (props.file && props.file.content) {
-            pellElement.content.innerHTML = gDocToPell(props.file.content);
+            pellElement.content.innerHTML = GDocToPell.gDocToPell(props.file.content);
 
             const part1 = props.file.name.includes("–") ? props.file.name.split(" –")[0] : props.file.name;
             const part2 = props.file.name.includes("–") ? props.file.name.split("– ")[1] : undefined;
@@ -62,7 +62,7 @@ const Editor: Component<Props> = (props: Props) => {
         } else {
             props.file.name = part1;
         }
-        props.file.content = pellElement.content.innerHTML;
+        props.file.content = PellToGDoc.pellToGdoc(pellElement.content);
         props.onEdit(props.file);
     };
 
@@ -87,7 +87,7 @@ const Editor: Component<Props> = (props: Props) => {
 
     const updateTitle = (e: KeyboardEvent) => {
         const input = e.target as HTMLInputElement;
-        input.style.width = (((input.value.length || 5) + 3) * 11) + 'px';
+        input.style.width = (((input.value.length || 5) + 3) * 13) + 'px';
         setTitle2(input.value);
         update();
     };
