@@ -53,7 +53,7 @@ module EachDayService {
             console.log("Existing file:", exiting[0])
             return exiting[0];
         }
-        const file = await GoogleDriveService.createTextFile(driveFolder, formatDate(d));
+        const file = await GoogleDriveService.createGDocFile(driveFolder, formatDate(d));
         console.log("Created new file:",file); 
         return file;
     }

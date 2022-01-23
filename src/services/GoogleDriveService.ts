@@ -69,41 +69,51 @@ export module GoogleDriveService {
     });
   }
 
-  export function createTextFile(folder: File, name: string): Promise<File> {
+  export async function createTextFile(folder: File, name: string): Promise<File> {
     const fileMetadata = {
       'name': name + ".txt",
       'mimeType': 'text/plain',
       "parents": [folder.id]
     };
-    return gapi.client.drive.files.create({
+    return (await gapi.client.drive.files.create({
       resource: fileMetadata
-    });
+    })).result;
   }
 
-  export function createGDocFile(folder: File, name: string, content: string): Promise<any> {
+  export async function createGDocFile(folder: File, name: string): Promise<File> {
     const fileMetadata = {
       'name': name,
       'mimeType': 'application/vnd.google-apps.document',
       "parents": [folder.id]
     };
-
-    const blob = new Blob([content], { type: 'text/html' });
-
-    const form = new FormData();
-    form.append("metadata", new Blob([JSON.stringify(fileMetadata)], { type: "application/json" }));
-    form.append("file", blob);
-    return fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&supportsAllDrives=true", {
-      method: "POST",
-      headers: new Headers({ Authorization: `Bearer ${gapi.auth.getToken().access_token}` }),
-      body: form,
-    });
+    return (await gapi.client.drive.files.create({
+      resource: fileMetadata
+    })).result;
   }
 
-  export function updateGDocFile(file: File) {
+  // export function createGDocFile(folder: File, name: string, content: string): Promise<any> {
+  //   const fileMetadata = {
+  //     'name': name,
+  //     'mimeType': 'application/vnd.google-apps.document',
+  //     "parents": [folder.id]
+  //   };
+
+  //   const blob = new Blob([content], { type: 'text/html' });
+
+  //   const form = new FormData();
+  //   form.append("metadata", new Blob([JSON.stringify(fileMetadata)], { type: "application/json" }));
+  //   form.append("file", blob);
+  //   return fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&supportsAllDrives=true", {
+  //     method: "POST",
+  //     headers: new Headers({ Authorization: `Bearer ${gapi.auth.getToken().access_token}` }),
+  //     body: form,
+  //   }).then(content => content.json());
+  // }
+
+  export function updateGDocFile(folder: File, file: File) {
     const fileMetadata = {
       'name': file.name,
-      'mimeType': 'application/vnd.google-apps.document',
-      "parents": [folder.id]
+      'mimeType': 'application/vnd.google-apps.document'
     };
 
     const blob = new Blob([file.content], { type: 'text/html' });
@@ -111,16 +121,16 @@ export module GoogleDriveService {
     const form = new FormData();
     form.append("metadata", new Blob([JSON.stringify(fileMetadata)], { type: "application/json" }));
     form.append("file", blob);
-    return fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&supportsAllDrives=true", {
+    return fetch("https://www.googleapis.com/upload/drive/v3/files/"+file.id +"?uploadType=multipart&supportsAllDrives=true", {
       method: "PATCH",
-      headers: new Headers({ Authorization: `Bearer ${gapi.auth.getToken().access_token}` }),
+      headers: new Headers({ Authorization: getToken() }),
       body: form,
-    });
+    }).then(content => content.json());
   }
 
   export function getFileContent(fileId: string): Promise<string> {
     return fetch("https://www.googleapis.com/drive/v3/files/"+fileId+"/export?mimeType=text/html", {
-      headers: new Headers({ Authorization: `Bearer ${gapi.auth.getToken().access_token}` })
+      headers: new Headers({ Authorization: getToken() })
     }).then(rep => rep.text());
   }
 

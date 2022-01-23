@@ -1,13 +1,12 @@
 #editor {
     background-color: white;
     max-width: 903px;
-    height: 88vh;
+    min-height: 88vh;
     margin: auto;
     border-radius: 33px 33px 0px 0px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     animation: bounce-up .33s;
-    position: relative;
-    bottom: 3vh;
+    margin-top: -3vh;
 }
 
 @keyframes bounce-up {
@@ -32,6 +31,7 @@
     /* border-bottom: 2px solid #eee; */
     outline: none;
     position: relative;
+    margin-bottom: 0;
 }
 
 #page-title::after {
@@ -44,20 +44,38 @@
     background: #eee;
 }
 
+#page-title-editable {
+    font-size: 30px;
+    border: none;
+    display: inline;
+    outline: none;
+    width: 70px;
+    color: #666;
+}
+
+#page-title-editable::placeholder {
+    color: #CCC;
+}
+
+
 #content {
     color: #666;
-    padding: 0 6%;
 }
 
 .pell-actionbar {
     text-align: center;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    background: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .pell-content {
-    height: 75vh;
-    max-height: 75vh;
+    min-height: 75vh;
     outline: none;
-    overflow-y: auto;
+    padding: 0 6%;
 }
 
 /* width */

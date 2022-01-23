@@ -30,6 +30,7 @@ const LandingPage: Component = () => {
         script.onload = handleClientLoad;
         script.src = "https://apis.google.com/js/api.js";
         document.body.appendChild(script);
+        // setReady(true);
     });
 
     return (
