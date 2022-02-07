@@ -22,6 +22,8 @@ const LandingPage: Component = () => {
     const onConnected = (connected: boolean) => {
         if(connected) {
             EachDayService.setupDrive().then(() => setReady(true));
+        } else {
+            setReady(false);
         }
     }
 
