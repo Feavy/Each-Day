@@ -59,7 +59,7 @@ module EachDayService {
     }
 
     export async function getFileByDate(d: Date): Promise<File[]> {
-        return GoogleDriveService.searchFiles(`modifiedTime > '${d.getFullYear()}-${("0" + (d.getMonth() + 1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}T00:00:00'`);
+        return GoogleDriveService.searchFiles(`mimeType = 'application/vnd.google-apps.document' and modifiedTime > '${d.getFullYear()}-${("0" + (d.getMonth() + 1)).slice(-2)}-${("0" + d.getDate()).slice(-2)}T00:00:00'`);
     }
 
     export function getDriveFolder() {
