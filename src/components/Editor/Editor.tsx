@@ -33,7 +33,7 @@ const Editor: Component<Props> = (props: Props) => {
             defaultParagraphSeparator: "div",
             styleWithCSS: false,
             onChange: update,
-            actions: ["heading1", "heading2", "bold", "italic", "underline", "strikethrough", "ulist", "olist", "quote", "line", "image"]
+            actions: ["paragraph", "heading1", "heading2", "bold", "italic", "underline", "strikethrough", "ulist", "olist", "quote", "line", "image"]
         });
     });
 
