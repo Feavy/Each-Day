@@ -1,3 +1,7 @@
+.left {
+    opacity: 0.33;
+}
+
 #editor-page {
     animation: fade-in .33s;
 }
@@ -54,4 +58,25 @@
 #head img {
     vertical-align: middle;
     padding: 1em;
+}
+
+@media screen and (max-width: 925px) {
+    #title {
+        padding-top: 2em;
+    }
+    #head p {
+        margin-top: 5px;
+    }
+    #head {
+        padding: 0;
+        margin: 0;
+    }
+    #head img {
+        width: 40px;
+        margin: 0;
+        padding: 5px;
+    }
+    #editor {
+        margin-top: 5em !important;
+    }
 }
