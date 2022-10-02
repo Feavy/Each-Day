@@ -21,11 +21,24 @@ interface Props {
 
 const Editor: Component<Props> = (props: Props) => {
     let editor: HTMLDivElement;
+    let titleSpan: HTMLSpanElement;
 
     let pellElement: pell.PellElement;
 
-    const [title1, setTitle1] = createSignal<string>(undefined);
-    const [title2, setTitle2] = createSignal<string>(undefined);
+    const [dateString, setDateString] = createSignal<string>(undefined);
+
+    const title = () => {
+        return titleSpan.textContent;
+    }
+
+    const setTitle = (title: string) => {
+        if(!title || title === "Sans titre") {
+            titleSpan.style.color = "#CCC";
+            return;
+        }
+        titleSpan.style.color = "";
+        titleSpan.textContent = title;
+    }
 
     onMount(() => {
         pellElement = pell.init({
@@ -46,8 +59,8 @@ const Editor: Component<Props> = (props: Props) => {
             const part2 = props.file.name.includes("–") ? props.file.name.split("– ")[1] : undefined;
 
             batch(() => {
-                setTitle1(part1);
-                setTitle2(part2);
+                setDateString(part1);
+                setTitle(part2);
             });
         } else {
             pellElement.content.innerHTML = "<div><br/></div>";
@@ -55,8 +68,8 @@ const Editor: Component<Props> = (props: Props) => {
     }, props.file);
 
     const update = () => {
-        const part1 = title1();
-        const part2 = title2();
+        const part1 = dateString();
+        const part2 = title();
         if (part2) {
             props.file.name = part1 + " – " + part2;
         } else {
@@ -86,15 +99,30 @@ const Editor: Component<Props> = (props: Props) => {
     };
 
     const updateTitle = (e: KeyboardEvent) => {
-        const input = e.target as HTMLInputElement;
-        input.style.width = (((input.value.length || 5) + 3) * 13) + 'px';
-        setTitle2(input.value);
+        const target = e.target as HTMLSpanElement;
+        setTitle(target.textContent);
         update();
     };
 
+    const clearPlaceholder = (e: MouseEvent) => {
+        const target = e.target as HTMLSpanElement;
+        if(target.textContent === "Sans titre") {
+            target.textContent = "";
+            titleSpan.style.color = "";
+        }
+    };
+
+    const onTitleBlur = (e: FocusEvent) => {
+        const target = e.target as HTMLSpanElement;
+        if(target.textContent === "") {
+            target.textContent = "Sans titre";
+            titleSpan.style.color = "#CCC";
+        }
+    }
+
     return (
         <div id="editor">
-            <h2 id="page-title">{title1()} – <input id="page-title-editable" onKeyUp={updateTitle} placeholder="Title" value={title2() ? title2() : null}></input></h2>
+            <h2 id="page-title">{dateString()} – <span style="color: #CCC" ref={titleSpan} contentEditable={true} id="page-title-editable" onKeyUp={updateTitle} onClick={clearPlaceholder} onBlur={onTitleBlur}>Sans titre</span></h2>
             <div id="content" ref={editor} onClick={onEditorClick}>
             </div>
         </div>

@@ -47,16 +47,10 @@
 #page-title-editable {
     font-size: 30px;
     border: none;
-    display: inline;
+    display: inline-block;
     outline: none;
-    width: 70px;
     color: #666;
 }
-
-#page-title-editable::placeholder {
-    color: #CCC;
-}
-
 
 #content {
     color: #666;
