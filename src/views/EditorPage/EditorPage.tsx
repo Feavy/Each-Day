@@ -49,7 +49,7 @@ const EditorPage: Component = () => {
     return (
         <div id="editor-page">
             <div id="head">
-                <p class="left"><span class="button"><img src={book}></img>Historique</span></p>
+                <p class="left"><span class="button">{/*<img src={book}></img>Historique*/}</span></p>
                 <p class="right"><span class="button" onClick={() => EachDayService.signOut()}>Déconnexion<img src={logout}></img></span></p>
             </div>
             <Editor file={file()} onEdit={onEdit}></Editor>
